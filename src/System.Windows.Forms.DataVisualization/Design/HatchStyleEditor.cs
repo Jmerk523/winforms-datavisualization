@@ -46,15 +46,18 @@ namespace System.Windows.Forms.Design.DataVisualization.Charting
 		{
 			if(e.Value is ChartHatchStyle)
 			{
-				// Create chart graphics object
-				if(_chartGraph == null)
-				{
-					_chartGraph = new ChartGraphics(null);
-				}
-				_chartGraph.Graphics  = e.Graphics;
+                // Create chart graphics object
+                if (_chartGraph == null)
+                {
+                    _chartGraph = new ChartGraphics(e.Graphics);
+                }
+                else
+                {
+                    _chartGraph.ResetRenderer(e.Graphics);
+                }
 
-				// Try to get original color from the object
-				Color	color1 = Color.Black;
+                // Try to get original color from the object
+                Color	color1 = Color.Black;
 				Color	color2 = Color.White;
 				if(e.Context != null && e.Context.Instance != null)
 				{

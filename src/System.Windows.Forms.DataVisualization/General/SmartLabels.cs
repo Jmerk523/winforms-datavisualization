@@ -823,11 +823,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
                 RectangleF lp = GetLabelPosition(graph, labelPosition, labelSize, format, false);
                 if (positionFound)
                 {
-                    graph.Graphics.DrawRectangle(Pens.Green, Rectangle.Round(graph.GetAbsoluteRectangle(lp)));
+                    graph.DrawRectangle(Pens.Green, Rectangle.Round(graph.GetAbsoluteRectangle(lp)));
                 }
                 else
                 {
-                    graph.Graphics.DrawRectangle(new Pen(Color.Magenta, 3), Rectangle.Round(graph.GetAbsoluteRectangle(lp)));
+                    graph.DrawRectangle(new Pen(Color.Magenta, 3), Rectangle.Round(graph.GetAbsoluteRectangle(lp)));
                 }
             }
 #endif
@@ -1006,7 +1006,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
                 // DEBUG: Mark collided labels
                 if (graph != null && common != null && common.Chart != null && common.Chart.ShowDebugMarkings)
                 {
-                    graph.Graphics.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
+                    graph.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
                 }
 #endif
                 collisionDetected = true;
@@ -1034,7 +1034,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 #if DEBUG
                                 if (graph != null && common.Chart.ShowDebugMarkings)
                                 {
-                                    graph.Graphics.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
+                                    graph.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
                                 }
 #endif
                                 collisionDetected = true;
@@ -1051,7 +1051,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 #if DEBUG
                                 if (graph != null && common.Chart.ShowDebugMarkings)
                                 {
-                                    graph.Graphics.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
+                                    graph.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
                                 }
 #endif
                                 collisionDetected = true;
@@ -1072,7 +1072,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 #if DEBUG
                             if (graph != null && common.Chart.ShowDebugMarkings)
                             {
-                                graph.Graphics.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
+                                graph.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
                             }
 #endif
                             collisionDetected = true;
@@ -1086,7 +1086,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 #if DEBUG
                             if (graph != null && common.Chart.ShowDebugMarkings)
                             {
-                                graph.Graphics.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
+                                graph.DrawRectangle(Pens.Cyan, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
                             }
 #endif
                             collisionDetected = true;
@@ -1148,8 +1148,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
                             common.ChartPicture.ChartGraph != null &&
                             common.Chart.ShowDebugMarkings)
                         {
-                            common.ChartPicture.ChartGraph.Graphics.DrawRectangle(Pens.Blue, Rectangle.Round(common.ChartPicture.ChartGraph.GetAbsoluteRectangle(pos)));
-                            common.ChartPicture.ChartGraph.Graphics.DrawRectangle(Pens.Red, Rectangle.Round(common.ChartPicture.ChartGraph.GetAbsoluteRectangle(labelPosition)));
+                            common.ChartPicture.ChartGraph.DrawRectangle(Pens.Blue, Rectangle.Round(common.ChartPicture.ChartGraph.GetAbsoluteRectangle(pos)));
+                            common.ChartPicture.ChartGraph.DrawRectangle(Pens.Red, Rectangle.Round(common.ChartPicture.ChartGraph.GetAbsoluteRectangle(labelPosition)));
                         }
 #endif
                         collisionDetected = true;
@@ -1594,8 +1594,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
 #if DEBUG
                     if (graph != null && common.Chart.ShowDebugMarkings)
                     {
-                        graph.Graphics.DrawRectangle(Pens.Blue, Rectangle.Round(graph.GetAbsoluteRectangle(pos)));
-                        graph.Graphics.DrawRectangle(Pens.Red, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
+                        graph.DrawRectangle(Pens.Blue, Rectangle.Round(graph.GetAbsoluteRectangle(pos)));
+                        graph.DrawRectangle(Pens.Red, Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition)));
                     }
 #endif
                     collisionDetected = true;

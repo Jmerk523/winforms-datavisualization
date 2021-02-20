@@ -59,7 +59,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         private RenderingType _activeRenderingType = RenderingType.Gdi;
 
         // GDI+ rendering engine
-        private GdiGraphics _gdiGraphics = new GdiGraphics();
+        private IChartRenderingEngine _gdiGraphics;
 
         // Document title used for SVG rendering
         //private string documentTitle = string.Empty;
@@ -251,6 +251,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		{
 			RenderingObject.DrawRectangle( pen, x, y, width, height );
 		}
+
+        internal void DrawRectangle(Pen pen, RectangleF rectangle)
+        {
+            DrawRectangle(pen, rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
+        }
 
 		/// <summary>
 		/// Draws a polygon defined by an array of PointF structures.
@@ -790,21 +795,82 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the reference to the Graphics object.
-		/// </summary>
-		public Graphics Graphics
-		{
-			get
-			{
-				return RenderingObject.Graphics;
-			}
-			set
-			{
-				RenderingObject.Graphics = value;
-			}
-		}
+        public void ResetRenderer(Graphics graphics)
+        {
+            if (RenderingObject is GdiGraphics gdi)
+            {
+                gdi.ResetGraphics(graphics);
+            }
+            else
+            {
+                ResetRenderer(new GdiGraphics(graphics));
+            }
+        }
+
+        public void ResetRenderer(IChartRenderingEngine engine)
+        {
+            _gdiGraphics = engine ?? throw new ArgumentNullException(nameof(engine));
+        }
+
+        public GraphicsAdapter Graphics => RenderingObject.Graphics;
 
 		#endregion // Properties
 	}
+
+    public interface GraphicsAdapter
+    {
+        float DpiX { get; }
+        float DpiY { get; }
+
+        Matrix Transform { get; }
+
+        InterpolationMode InterpolationMode { get; set; }
+        CompositingQuality CompositingQuality { get; set; }
+
+        RectangleF GetBounds(Region region);
+        bool IsInfinite(Region region);
+        bool IsVisible(Region region);
+    }
+
+    public class GraphicsAdapterImpl : GraphicsAdapter
+    {
+        private readonly Graphics graphics;
+
+        public float DpiX => graphics.DpiX;
+        public float DpiY => graphics.DpiY;
+
+        public Matrix Transform => graphics.Transform;
+
+        public InterpolationMode InterpolationMode
+        {
+            get => graphics.InterpolationMode;
+            set => graphics.InterpolationMode = value;
+        }
+
+        public CompositingQuality CompositingQuality
+        {
+            get => graphics.CompositingQuality;
+            set => graphics.CompositingQuality = value;
+        }
+
+        public GraphicsAdapterImpl(Graphics graphics)
+        {
+            this.graphics = graphics;
+        }
+
+        public RectangleF GetBounds(Region region)
+        {
+            return region.GetBounds(graphics);
+        }
+
+        public bool IsInfinite(Region region)
+        {
+            return region.IsInfinite(graphics);
+        }
+
+        public bool IsVisible(Region region)
+        {
+            return !region.IsEmpty(graphics);
+        }
+    }
 }

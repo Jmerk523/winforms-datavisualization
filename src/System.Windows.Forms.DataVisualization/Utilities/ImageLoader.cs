@@ -282,8 +282,8 @@ namespace System.Windows.Forms.DataVisualization.Charting.Utilities
 			catch(FileNotFoundException)
 			{
 				return null;
-			}
-		}
+            }
+        }
 
         /// <summary>
         /// Returns the image size taking the image DPI into consideration.
@@ -292,7 +292,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.Utilities
         /// <param name="graphics">Graphics used to calculate the image size.</param>
         /// <param name="size">Calculated size.</param>
         /// <returns>false if it fails to calculate the size, otherwise true.</returns>
-        internal bool GetAdjustedImageSize(string name, Graphics graphics, ref SizeF size)
+        internal bool GetAdjustedImageSize(string name, GraphicsAdapter graphics, ref SizeF size)
         {
             Image image = LoadImage(name);
 
@@ -312,8 +312,20 @@ namespace System.Windows.Forms.DataVisualization.Charting.Utilities
         /// <param name="size">Calculated size.</param>
         internal static void GetAdjustedImageSize(Image image, Graphics graphics, ref SizeF size)
         {
-            if (graphics != null)
+            GetAdjustedImageSize(image, graphics == null ? (GraphicsAdapter)null : new GraphicsAdapterImpl(graphics), ref size);
+        }
+
+        /// <summary>
+        /// Returns the image size taking the image DPI into consideration.
+        /// </summary>
+        /// <param name="image">Image for whcih to calculate the size.</param>
+        /// <param name="graphics">Graphics used to calculate the image size.</param>
+        /// <param name="size">Calculated size.</param>
+        internal static void GetAdjustedImageSize(Image image, GraphicsAdapter res, ref SizeF size)
+        {
+            if (res != null)
             {
+                var graphics = res;
                 //this will work in case the image DPI is specified, otherwise the image DPI will be assumed to be same as the screen DPI
                 size.Width = image.Width * graphics.DpiX / image.HorizontalResolution;
                 size.Height = image.Height * graphics.DpiY / image.VerticalResolution;
@@ -336,7 +348,17 @@ namespace System.Windows.Forms.DataVisualization.Charting.Utilities
             return graphics.DpiX == image.HorizontalResolution && graphics.DpiY == image.VerticalResolution;
         }
 
+        internal static bool DoDpisMatch(Image image, GraphicsAdapter graphics)
+        {
+            return graphics.DpiX == image.HorizontalResolution && graphics.DpiY == image.VerticalResolution;
+        }
+
         internal static Image GetScaledImage(Image image, Graphics graphics)
+        {
+            return GetScaledImage(image, new GraphicsAdapterImpl(graphics));
+        }
+
+        internal static Image GetScaledImage(Image image, GraphicsAdapter graphics)
         {
             Bitmap scaledImage = new Bitmap(image, new Size((int)(image.Width * graphics.DpiX / image.HorizontalResolution),
                 (int)(image.Height * graphics.DpiY / image.VerticalResolution)));

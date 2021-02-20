@@ -483,7 +483,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
                     using (Brush shadowBrush = new SolidBrush((series.ShadowColor.A != 255) ? series.ShadowColor : Color.FromArgb(point.Color.A / 2, series.ShadowColor)))
                     {
                         Region clipRegion = null;
-                        if (!graph.IsClipEmpty && !graph.Clip.IsInfinite(graph.Graphics))
+                        if (!graph.IsClipEmpty && !graph.Graphics.IsInfinite(graph.Clip))
                         {
                             clipRegion = graph.Clip;
                             clipRegion.Translate(series.ShadowOffset + 1, series.ShadowOffset + 1);

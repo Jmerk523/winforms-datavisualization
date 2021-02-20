@@ -324,7 +324,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
                         GraphicsState graphicsState = graph.Save();
                         Region clipRegion = null;
                         Region clipRegionOld = null;
-                        if (!graph.IsClipEmpty && !graph.Clip.IsInfinite(graph.Graphics))
+                        if (!graph.IsClipEmpty && !graph.Graphics.IsInfinite(graph.Clip))
                         {
                             clipRegionOld = graph.Clip.Clone();
                             clipRegion = graph.Clip;

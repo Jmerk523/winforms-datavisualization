@@ -52,9 +52,12 @@ namespace System.Windows.Forms.Design.DataVisualization.Charting
 				// Create chart graphics object
 				if(_chartGraph == null)
 				{
-					_chartGraph = new ChartGraphics(null);
+					_chartGraph = new ChartGraphics(e.Graphics);
 				}
-				_chartGraph.Graphics = e.Graphics;
+                else
+                {
+                    _chartGraph.ResetRenderer(e.Graphics);
+                }
 
 				// Get marker properties
 				DataPointCustomProperties	attributes = null;

@@ -1162,8 +1162,8 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 
 						brush.InterpolationColors = colorBlend;
 
-						// Fill path
-						this.Graph.Graphics.FillPath(brush, segmentPath);
+                        // Fill path
+                        this.Graph.FillPath(brush, segmentPath);
 
 						// Draw path border
 						Pen pen = new Pen(point.BorderColor, point.BorderWidth);

@@ -23,15 +23,16 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// GdiGraphics class is chart GDI+ rendering engine.
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gdi")]
-    internal class GdiGraphics : IChartRenderingEngine
+    public class GdiGraphics : IChartRenderingEngine
 	{
 		#region Constructors
 
 		/// <summary>
 		/// Default constructor
 		/// </summary>
-		public GdiGraphics()
+		public GdiGraphics(Graphics graphics)
 		{
+            ResetGraphics(graphics);
 		}
 
 		#endregion // Constructor
@@ -672,20 +673,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Reference to the Graphics object
-		/// </summary>
-		public Graphics Graphics
-		{
-			get
-			{
-				return _graphics;
-			}
-			set
-			{
-				_graphics = value;
-			}
-		}
+        public GraphicsAdapter Graphics { get; private set; }
+
+        public void ResetGraphics(Graphics graphics)
+        {
+            __graphics = graphics ?? throw new ArgumentNullException(nameof(graphics));
+            Graphics = new GraphicsAdapterImpl(_graphics);
+        }
 
 		#endregion // Properties
 
@@ -694,7 +688,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <summary>
 		/// Graphics object
 		/// </summary>
-		Graphics		_graphics = null;
+		Graphics		__graphics = null;
+
+        private Graphics _graphics => __graphics ?? throw new InvalidOperationException("No current graphics object");
 
 		#endregion // Fields
 	}

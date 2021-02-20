@@ -24,7 +24,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// which must be implemented by any chart rendering engine. It contains 
     /// methods for drawing basic shapes.
     /// </summary>
-    internal interface IChartRenderingEngine
+    public interface IChartRenderingEngine
 	{
 		#region Drawing Methods
 
@@ -499,10 +499,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		Region Clip {get; set;}
 
-		/// <summary>
-		/// Reference to the Graphics object
-		/// </summary>
-		Graphics Graphics {get; set;}
+        /// <summary>
+        /// Reference to the Graphics object
+        /// </summary>
+        GraphicsAdapter Graphics { get; }
 		
 		/// <summary>
 		/// Gets a value indicating whether the clipping region of this Graphics object is empty.

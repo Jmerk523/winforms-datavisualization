@@ -369,7 +369,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			{
 				TextureBrush backFilledBrush = null;
 				Bitmap bitmap = new Bitmap(image.Width, image.Height);
-				using(Graphics graphics = Graphics.FromImage(bitmap))
+				using(Graphics graphics = System.Drawing.Graphics.FromImage(bitmap))
 				{
 					using(SolidBrush backBrush = new SolidBrush(backColor))
 					{
@@ -2011,10 +2011,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
                         region.Exclude(this.GetAbsoluteRectangle(boundaryRect));
 
                         // If any part of the label was outside bounding rectangle
-                        if (!region.IsEmpty(Graphics))
+                        if (Graphics.IsVisible(region))
                         {
                             this.Transform = oldTransform;
-                            RectangleF truncateRect = region.GetBounds(Graphics);
+                            RectangleF truncateRect = Graphics.GetBounds(region);
 
                             float sizeChange = truncateRect.Width / (float)Math.Cos(Math.Abs(angle) / 180F * Math.PI);
                             if (axis.AxisPosition == AxisPosition.Left)
@@ -5546,21 +5546,30 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 			this._height = height;
 		}
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="common">Common elements class</param>
-		internal ChartGraphics(CommonElements common)
-		{
-			// Set Common elements
-			this._common = common;
-            base.Common = common;
-			// Create a pen object
-			_pen = new Pen(Color.Black);
+        internal ChartGraphics(Graphics graphics) : this(null, graphics)
+        {
+        }
 
-			// Create a brush object
-			_solidBrush = new SolidBrush(Color.Black);
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="common">Common elements class</param>
+        internal ChartGraphics(CommonElements common, Graphics graphics) : this(common, new GdiGraphics(graphics))
+		{
+        }
+
+        internal ChartGraphics(CommonElements common, IChartRenderingEngine engine)
+        {
+            // Set Common elements
+            this._common = common;
+            base.Common = common;
+            // Create a pen object
+            _pen = new Pen(Color.Black);
+
+            // Create a brush object
+            _solidBrush = new SolidBrush(Color.Black);
+            _gdiGraphics = engine;
+        }
 
 		/// <summary>
 		/// Chart Graphics Anti alias mode

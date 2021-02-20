@@ -877,8 +877,7 @@ System.Drawing.Image		graphicsImage = null;
 			{
                 graphicsImage = new System.Drawing.Bitmap(Common.ChartPicture.Width, Common.ChartPicture.Height);
 				graphics = Graphics.FromImage( graphicsImage );
-				tempChartGraph = new ChartGraphics( Common );
-				tempChartGraph.Graphics = graphics;
+				tempChartGraph = new ChartGraphics( Common, graphics);
 				tempChartGraph.SetPictureSize( Common.ChartPicture.Width, Common.ChartPicture.Height );
 				this.Common.graph = tempChartGraph;
 			}

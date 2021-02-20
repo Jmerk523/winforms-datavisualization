@@ -1365,6 +1365,18 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
             #region Constructors
 
+        private void InitGraphics(Graphics graphics)
+        {
+            if (ChartGraph == null)
+            {
+                ChartGraph = new ChartGraphics(Common, graphics);
+            }
+            else
+            {
+                ChartGraph.ResetRenderer(graphics);
+            }
+        }
+
             /// <summary>
 		/// Constructor.
 		/// </summary>
@@ -1378,7 +1390,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
 			// Create and set Common Elements
             Common = new CommonElements(container);
-			ChartGraph= new ChartGraphics(Common);
 			hotRegionsList = new HotRegionsList(Common);
 
 			// Create border properties class
@@ -1450,13 +1461,12 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Graphics offScreen = Graphics.FromImage(image);
 
             // Connect Graphics object with Chart Graphics object
-            ChartGraph.Graphics = offScreen;
+            InitGraphics(offScreen);
 
             // Remember the previous dirty flag
 			bool oldDirtyFlag = this.Common.Chart.dirtyFlag;
 
-
-            Paint(ChartGraph.Graphics, false);
+            Paint(false);
 
             image.Dispose();
 
@@ -1509,8 +1519,22 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="graph">The graph provides drawing object to the display device. A Graphics object is associated with a specific device context.</param>
         /// <param name="paintTopLevelElementOnly">Indicates that only chart top level elements like cursors, selection or annotation objects must be redrawn.</param>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "3#svg")]
-        internal void Paint( 
-			Graphics graph, 
+        internal void Paint(
+            Graphics graph,
+            bool paintTopLevelElementOnly)
+        {
+            // Connect Graphics object with Chart Graphics object
+            InitGraphics(graph);
+            Paint(paintTopLevelElementOnly);
+        }
+
+        /// <summary>
+        /// This function paints a chart.
+        /// </summary>
+        /// <param name="graph">The graph provides drawing object to the display device. A Graphics object is associated with a specific device context.</param>
+        /// <param name="paintTopLevelElementOnly">Indicates that only chart top level elements like cursors, selection or annotation objects must be redrawn.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "3#svg")]
+        internal void Paint(
 			bool paintTopLevelElementOnly )
 		{
 
@@ -1583,7 +1607,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 
             // Connect Graphics object with Chart Graphics object
-			ChartGraph.Graphics = graph;
+            //InitGraphics(graph);
 
 			Common.graph = ChartGraph;
 
