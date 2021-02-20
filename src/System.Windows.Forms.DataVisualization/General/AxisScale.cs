@@ -1620,7 +1620,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// estimate a rounded minimum.
 		/// </summary>
 		/// <param name="min"> This value is a recommendation for the minimum value. </param>
-		internal void SetAutoMinimum(double min)
+		public void SetAutoMinimum(double min)
 		{
 			// Set the minimum
 			if( _autoMinimum )
@@ -1628,14 +1628,14 @@ namespace System.Windows.Forms.DataVisualization.Charting
 				minimum = min;
 			}
 		}
-		
-		/// <summary>
-		/// Set auto maximum number. The maximum number 
-		/// which was sent to this function will be used to 
-		/// estimate a rounded maximum.
-		/// </summary>
-		/// <param name="max">This value is a recommendation for the maximum value.</param>
-		internal void SetAutoMaximum(double max)
+
+        /// <summary>
+        /// Set auto maximum number. The maximum number 
+        /// which was sent to this function will be used to 
+        /// estimate a rounded maximum.
+        /// </summary>
+        /// <param name="max">This value is a recommendation for the maximum value.</param>
+        public void SetAutoMaximum(double max)
 		{
 			// Set the maximum
 			if( _autoMaximum )
@@ -1644,13 +1644,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Find opposite axis of this axis.  What is opposite 
-		/// axis depend on first series in chart area and primary 
-		/// and secondary X and Y axes for the first series.
-		/// </summary>
-		/// <returns>Opposite axis</returns>
-		internal Axis GetOppositeAxis()
+        /// <summary>
+        /// Find opposite axis of this axis.  What is opposite 
+        /// axis depend on first series in chart area and primary 
+        /// and secondary X and Y axes for the first series.
+        /// </summary>
+        /// <returns>Opposite axis</returns>
+        public Axis GetOppositeAxis()
 		{
 			// Oppoiste axis found
             if (oppositeAxis != null) 

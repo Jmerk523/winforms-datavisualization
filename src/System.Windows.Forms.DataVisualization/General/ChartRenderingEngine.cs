@@ -30,7 +30,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// <summary>
     /// Specify Rendering AxisName
     /// </summary>
-    internal enum RenderingType
+    public enum RenderingType
 	{
 		/// <summary>
 		/// GDI+ AxisName
@@ -65,7 +65,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         //private string documentTitle = string.Empty;
 
         // True if text should be clipped
-        internal bool IsTextClipped = false;
+        public bool IsTextClipped = false;
 
 		#endregion // Fields
 
@@ -77,7 +77,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="pen">Pen object that determines the color, width, and style of the line.</param>
 		/// <param name="pt1">PointF structure that represents the first point to connect.</param>
 		/// <param name="pt2">PointF structure that represents the second point to connect.</param>
-		internal void DrawLine(
+		public void DrawLine(
 			Pen pen,
 			PointF pt1,
 			PointF pt2
@@ -94,7 +94,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="y1">y-coordinate of the first point.</param>
 		/// <param name="x2">x-coordinate of the second point.</param>
 		/// <param name="y2">y-coordinate of the second point.</param>
-		internal void DrawLine(
+		public void DrawLine(
 			Pen pen,
 			float x1,
 			float y1,
@@ -116,7 +116,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="srcHeight">Height of the portion of the source image to draw.</param>
 		/// <param name="srcUnit">Member of the GraphicsUnit enumeration that specifies the units of measure used to determine the source rectangle.</param>
 		/// <param name="imageAttr">ImageAttributes object that specifies recoloring and gamma information for the image object.</param>
-		internal void DrawImage(
+		public void DrawImage(
             System.Drawing.Image image,
 			Rectangle destRect,
 			int srcX,
@@ -148,7 +148,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="y">y-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse.</param>
 		/// <param name="width">Width of the bounding rectangle that defines the ellipse.</param>
 		/// <param name="height">Height of the bounding rectangle that defines the ellipse.</param>
-		internal void DrawEllipse(
+		public void DrawEllipse(
 			Pen pen,
 			float x,
 			float y,
@@ -169,7 +169,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="offset">Offset from the first element in the array of the points parameter to the starting point in the curve.</param>
 		/// <param name="numberOfSegments">Number of segments after the starting point to include in the curve.</param>
 		/// <param name="tension">Value greater than or equal to 0.0F that specifies the tension of the curve.</param>
-		internal void DrawCurve(
+		public void DrawCurve(
 			Pen pen,
 			PointF[] points,
 			int offset,
@@ -241,7 +241,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="y">y-coordinate of the upper-left corner of the rectangle to draw.</param>
 		/// <param name="width">Width of the rectangle to draw.</param>
 		/// <param name="height">Height of the rectangle to draw.</param>
-		internal void DrawRectangle(
+		public void DrawRectangle(
 			Pen pen,
 			int x,
 			int y,
@@ -252,7 +252,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			RenderingObject.DrawRectangle( pen, x, y, width, height );
 		}
 
-        internal void DrawRectangle(Pen pen, RectangleF rectangle)
+        public void DrawRectangle(Pen pen, RectangleF rectangle)
         {
             DrawRectangle(pen, rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
         }
@@ -262,7 +262,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="pen">Pen object that determines the color, width, and style of the polygon.</param>
 		/// <param name="points">Array of PointF structures that represent the vertices of the polygon.</param>
-		internal void DrawPolygon(
+		public void DrawPolygon(
 			Pen pen,
 			PointF[] points
 			)
@@ -278,7 +278,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="brush">Brush object that determines the color and texture of the drawn text.</param>
 		/// <param name="layoutRectangle">RectangleF structure that specifies the location of the drawn text.</param>
 		/// <param name="format">StringFormat object that specifies formatting properties, such as line spacing and alignment, that are applied to the drawn text.</param>
-		internal void DrawString(
+		public void DrawString(
 			string s,
 			Font font,
 			Brush brush,
@@ -304,7 +304,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="brush">Brush object that determines the color and texture of the drawn text.</param>
 		/// <param name="point">PointF structure that specifies the upper-left corner of the drawn text.</param>
 		/// <param name="format">StringFormat object that specifies formatting properties, such as line spacing and alignment, that are applied to the drawn text.</param>
-		internal void DrawString(
+		public void DrawString(
 			string s,
 			Font font,
 			Brush brush,
@@ -343,7 +343,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="srcHeight">Height of the portion of the source image to draw.</param>
 		/// <param name="srcUnit">Member of the GraphicsUnit enumeration that specifies the units of measure used to determine the source rectangle.</param>
 		/// <param name="imageAttrs">ImageAttributes object that specifies recoloring and gamma information for the image object.</param>
-		internal void DrawImage(
+		public void DrawImage(
             System.Drawing.Image image,
 			Rectangle destRect,
 			float srcX,
@@ -365,7 +365,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="y">The y-coordinate of the upper-left corner of the rectangle to draw.</param>
 		/// <param name="width">The width of the rectangle to draw.</param>
 		/// <param name="height">The height of the rectangle to draw.</param>
-		internal void DrawRectangle(
+		public void DrawRectangle(
 			Pen pen,
 			float x,
 			float y,
@@ -381,7 +381,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="pen">Pen object that determines the color, width, and style of the path.</param>
 		/// <param name="path">GraphicsPath object to draw.</param>
-		internal void DrawPath(
+		public void DrawPath(
 			Pen pen,
 			GraphicsPath path
 			)
@@ -406,7 +406,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="height">Height of the bounding rectangle that defines the ellipse from which the pie shape comes.</param>
 		/// <param name="startAngle">Angle measured in degrees clockwise from the x-axis to the first side of the pie shape.</param>
 		/// <param name="sweepAngle">Angle measured in degrees clockwise from the startAngle parameter to the second side of the pie shape.</param>
-		internal void DrawPie(
+		public void DrawPie(
 			Pen pen,
 			float x,
 			float y,
@@ -424,7 +424,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="pen">Pen object that determines the color, width, and style of the ellipse.</param>
 		/// <param name="rect">RectangleF structure that defines the boundaries of the ellipse.</param>
-		internal void DrawEllipse(
+		public void DrawEllipse(
 			Pen pen,
 			RectangleF rect
 			)
@@ -437,7 +437,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="pen">Pen object that determines the color, width, and style of the line segments.</param>
 		/// <param name="points">Array of PointF structures that represent the points to connect.</param>
-		internal void DrawLines(
+		public void DrawLines(
 			Pen pen,
 			PointF[] points
 			)
@@ -455,7 +455,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="brush">Brush object that determines the characteristics of the fill.</param>
 		/// <param name="rect">RectangleF structure that represents the bounding rectangle that defines the ellipse.</param>
-		internal void FillEllipse(
+		public void FillEllipse(
 			Brush brush,
 			RectangleF rect
 			)
@@ -468,7 +468,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="brush">Brush object that determines the characteristics of the fill.</param>
 		/// <param name="path">GraphicsPath object that represents the path to fill.</param>
-		internal void FillPath(
+		public void FillPath(
 			Brush brush,
 			GraphicsPath path
 			)
@@ -488,7 +488,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="brush">Brush object that determines the characteristics of the fill.</param>
 		/// <param name="region">Region object that represents the area to fill.</param>
-		internal void FillRegion(
+		public void FillRegion(
 			Brush brush,
 			Region region
 			)
@@ -501,7 +501,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="brush">Brush object that determines the characteristics of the fill.</param>
 		/// <param name="rect">RectangleF structure that represents the rectangle to fill.</param>
-		internal void FillRectangle(
+		public void FillRectangle(
 			Brush brush,
 			RectangleF rect
 			)
@@ -517,7 +517,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="y">y-coordinate of the upper-left corner of the rectangle to fill.</param>
 		/// <param name="width">Width of the rectangle to fill.</param>
 		/// <param name="height">Height of the rectangle to fill.</param>
-		internal void FillRectangle(
+		public void FillRectangle(
 			Brush brush,
 			float x,
 			float y,
@@ -533,7 +533,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="brush">Brush object that determines the characteristics of the fill.</param>
 		/// <param name="points">Array of PointF structures that represent the vertices of the polygon to fill.</param>
-		internal void FillPolygon(
+		public void FillPolygon(
 			Brush brush,
 			PointF[] points
 			)
@@ -553,7 +553,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="height">Height of the bounding rectangle that defines the ellipse from which the pie section comes.</param>
 		/// <param name="startAngle">Angle in degrees measured clockwise from the x-axis to the first side of the pie section.</param>
 		/// <param name="sweepAngle">Angle in degrees measured clockwise from the startAngle parameter to the second side of the pie section.</param>
-		internal void FillPie(
+		public void FillPie(
 			Brush brush,
 			float x,
 			float y,
@@ -575,7 +575,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
         /// <param name="url">The location of the referenced object, expressed as a URI reference.</param>
 		/// <param name="title">Title which could be used for tooltips.</param>
-        internal void StartHotRegion( string url, string title )
+        public void StartHotRegion( string url, string title )
 		{
 			RenderingObject.BeginSelection( url, title );
 		}
@@ -584,7 +584,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// This method starts SVG Selection mode
 		/// </summary>
 		/// <param name="point">Data Point which properties are used for SVG selection</param>
-        internal void StartHotRegion(DataPoint point)
+        public void StartHotRegion(DataPoint point)
 		{
 			StartHotRegion( point, false );
 		}
@@ -594,7 +594,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="point">Data Point which properties are used for SVG selection</param>
 		/// <param name="labelRegion">Indicates if point label region is processed.</param>
-		internal void StartHotRegion(DataPoint point, bool labelRegion)
+		public void StartHotRegion(DataPoint point, bool labelRegion)
 		{
 			string hRef = string.Empty;
 			string tooltip = (labelRegion) ? point.LabelToolTip : point.ToolTip;
@@ -610,7 +610,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <summary>
 		/// This method stops SVG Selection mode
 		/// </summary>
-		internal void EndHotRegion()
+		public void EndHotRegion()
 		{
 			RenderingObject.EndSelection();
 		}
@@ -624,7 +624,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="layoutArea">SizeF structure that specifies the maximum layout area for the text.</param>
 		/// <param name="stringFormat">StringFormat object that represents formatting information, such as line spacing, for the string.</param>
 		/// <returns>This method returns a SizeF structure that represents the size, in pixels, of the string specified in the text parameter as drawn with the font parameter and the stringFormat parameter.</returns>
-		internal SizeF MeasureString(
+		public SizeF MeasureString(
 			string text,
 			Font font,
 			SizeF layoutArea,
@@ -641,7 +641,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="text">String to measure.</param>
 		/// <param name="font">Font object defines the text format of the string.</param>
 		/// <returns>This method returns a SizeF structure that represents the size, in pixels, of the string specified in the text parameter as drawn with the font parameter and the stringFormat parameter.</returns>
-		internal SizeF MeasureString(
+		public SizeF MeasureString(
 			string text,
 			Font font
 			)
@@ -653,7 +653,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// Saves the current state of this Graphics object and identifies the saved state with a GraphicsState object.
 		/// </summary>
 		/// <returns>This method returns a GraphicsState object that represents the saved state of this Graphics object.</returns>
-		internal GraphicsState Save()
+		public GraphicsState Save()
 		{
 			return RenderingObject.Save();
 		}
@@ -662,7 +662,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// Restores the state of this Graphics object to the state represented by a GraphicsState object.
 		/// </summary>
 		/// <param name="gstate">GraphicsState object that represents the state to which to restore this Graphics object.</param>
-		internal void Restore(
+		public void Restore(
 			GraphicsState gstate
 			)
 		{
@@ -672,7 +672,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
 		/// Resets the clip region of this Graphics object to an infinite region.
 		/// </summary>
-		internal void ResetClip()
+		public void ResetClip()
 		{
             RenderingObject.ResetClip();
 		}
@@ -681,7 +681,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// Sets the clipping region of this Graphics object to the rectangle specified by a RectangleF structure.
 		/// </summary>
 		/// <param name="rect">RectangleF structure that represents the new clip region.</param>
-		internal void SetClipAbs(RectangleF rect)
+		public void SetClipAbs(RectangleF rect)
 		{
 			RenderingObject.SetClip( rect );
 		}
@@ -691,7 +691,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="dx">x component of the translation.</param>
 		/// <param name="dy">y component of the translation.</param>
-		internal void TranslateTransform(
+		public void TranslateTransform(
 			float dx,
 			float dy
 			)
@@ -706,7 +706,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <summary>
 		/// Gets current rendering object.
 		/// </summary>
-		internal IChartRenderingEngine RenderingObject
+		public IChartRenderingEngine RenderingObject
 		{
 			get
 			{
@@ -717,7 +717,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <summary>
 		/// Gets the active rendering type.
 		/// </summary>
-		internal RenderingType ActiveRenderingType
+		public RenderingType ActiveRenderingType
 		{
 			get
 			{
@@ -725,10 +725,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the rendering mode for text associated with this Graphics object.
-		/// </summary>
-		internal TextRenderingHint TextRenderingHint 
+        /// <summary>
+        /// Gets or sets the rendering mode for text associated with this Graphics object.
+        /// </summary>
+        public TextRenderingHint TextRenderingHint 
 		{
 			get
 			{
@@ -740,10 +740,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the world transformation for this Graphics object.
-		/// </summary>
-		internal Matrix Transform
+        /// <summary>
+        /// Gets or sets the world transformation for this Graphics object.
+        /// </summary>
+        public Matrix Transform
 		{
 			get
 			{
@@ -755,10 +755,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets the rendering quality for this Graphics object.
-		/// </summary>
-		internal SmoothingMode SmoothingMode 
+        /// <summary>
+        /// Gets or sets the rendering quality for this Graphics object.
+        /// </summary>
+        public SmoothingMode SmoothingMode 
 		{
 			get
 			{
@@ -770,10 +770,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets a Region object that limits the drawing region of this Graphics object.
-		/// </summary>
-		internal Region Clip 
+        /// <summary>
+        /// Gets or sets a Region object that limits the drawing region of this Graphics object.
+        /// </summary>
+        public Region Clip 
 		{
 			get
 			{
@@ -785,10 +785,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		/// <summary>
-		/// Gets a value indicating whether the clipping region of this Graphics object is empty.
-		/// </summary>
-		internal bool IsClipEmpty {
+        /// <summary>
+        /// Gets a value indicating whether the clipping region of this Graphics object is empty.
+        /// </summary>
+        public bool IsClipEmpty {
 			get
 			{
 				return RenderingObject.IsClipEmpty;

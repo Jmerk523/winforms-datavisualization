@@ -27,7 +27,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// 3D cube surfaces names.
     /// </summary>
     [Flags]
-    internal enum SurfaceNames
+    public enum SurfaceNames
 	{
 		/// <summary>
 		/// Front.
@@ -213,7 +213,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 	/// AxisName of drawing operation.
 	/// </summary>
 	[Flags]
-    internal enum DrawingOperationTypes
+    public enum DrawingOperationTypes
 	{
 		/// <summary>
 		/// Draw element.
@@ -229,7 +229,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 	/// <summary>
 	/// AxisName of line segment.
 	/// </summary>
-    internal enum LineSegmentType
+    public enum LineSegmentType
 	{
 		/// <summary>
 		/// Only one segment exists.
@@ -290,9 +290,34 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		internal	Pen		frontLinePen = null;
 
-		#endregion
+        #endregion
 
-		#region 3D Line drawing methods
+        #region 3D Line drawing methods
+
+        /// <summary>
+        /// Draws grid line in 3D space (on two area scene walls)
+        /// </summary>
+        /// <param name="area">Chart area.</param>
+        /// <param name="color">Line color.</param>
+        /// <param name="width">Line width.</param>
+        /// <param name="style">Line style.</param>
+        /// <param name="point1">First line point.</param>
+        /// <param name="point2">Second line point.</param>
+        /// <param name="horizontal">Indicates that grid line is horizontal</param>
+        /// <param name="obj">Selected object</param>
+        public void Draw3DGridLine(
+            ChartArea area,
+            Color color,
+            int width,
+            ChartDashStyle style,
+            PointF point1,
+            PointF point2,
+            bool horizontal,
+            object obj
+            )
+        {
+            Draw3DGridLine(area, color, width, style, point1, point2, horizontal, null, obj);
+        }
 
         /// <summary>
         /// Draws grid line in 3D space (on two area scene walls)
@@ -370,8 +395,33 @@ namespace System.Windows.Forms.DataVisualization.Charting
 					obj,
                     chartElementType
 					);
-			}
-		}
+            }
+        }
+
+        /// <summary>
+        /// Draws a line connecting the two specified points.
+        /// </summary>
+        /// <param name="matrix">Coordinates transformation matrix.</param>
+        /// <param name="color">Line color.</param>
+        /// <param name="width">Line width.</param>
+        /// <param name="style">Line style.</param>
+        /// <param name="firstPoint">A Point that represents the first point to connect.</param>
+        /// <param name="secondPoint">A Point that represents the second point to connect.</param>
+        /// <param name="obj">Selected object</param>
+        /// <param name="type">Selected chart element</param>
+        public void Draw3DLine(
+            Matrix3D matrix,
+            Color color,
+            int width,
+            ChartDashStyle style,
+            Point3D firstPoint,
+            Point3D secondPoint,
+            object obj,
+            ChartElementType type
+            )
+        {
+            Draw3DLine(matrix, color, width, style, firstPoint, secondPoint, null, obj, type);
+        }
 
 		/// <summary>
 		/// Draws a line connecting the two specified points.
@@ -450,7 +500,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="brush">Brush used for fill</param>
 		/// <param name="pen">Pen used for drawing</param>
 		/// <param name="doughnut">Chart AxisName is Doughnut</param>
-		internal void FillPieSides( 
+		public void FillPieSides( 
 			ChartArea area,
             float inclination,
 			float startAngle,
@@ -659,7 +709,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="startAngle">Start pie angle</param>
 		/// <param name="sweepAngle">End pie angle</param>
 		/// <param name="pointIndex">Data Point Index</param>
-		internal void FillPieCurve( 
+		public void FillPieCurve( 
 			ChartArea area,
 			DataPoint point,
 			Brush brush,
@@ -799,7 +849,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="sweepAngle">The end angle of pie slice</param>
 		/// <param name="fill">Fill pie slice with brush</param>
 		/// <param name="pointIndex"></param>
-		internal void FillPieSlice( ChartArea area, DataPoint point, SolidBrush brush, Pen pen, PointF firstRectPoint, PointF firstPoint, PointF secondRectPoint, PointF secondPoint, PointF center, float startAngle, float sweepAngle, bool fill, int pointIndex )
+		public void FillPieSlice( ChartArea area, DataPoint point, SolidBrush brush, Pen pen, PointF firstRectPoint, PointF firstPoint, PointF secondRectPoint, PointF secondPoint, PointF center, float startAngle, float sweepAngle, bool fill, int pointIndex )
 		{
 			// Common elements
 			CommonElements common = area.Common;
@@ -917,7 +967,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="fill">Fill Doughnut slice with brush</param>
 		/// <param name="doughnutRadius">Radius for doughnut chart</param>
 		/// <param name="pointIndex">Data Point Index</param>
-		internal void FillDoughnutSlice( ChartArea area, DataPoint point, SolidBrush brush, Pen pen, PointF firstRectPoint, PointF firstPoint, PointF secondRectPoint, PointF secondPoint, PointF threePoint, PointF fourPoint, float startAngle, float sweepAngle, bool fill, float doughnutRadius, int pointIndex )
+		public void FillDoughnutSlice( ChartArea area, DataPoint point, SolidBrush brush, Pen pen, PointF firstRectPoint, PointF firstPoint, PointF secondRectPoint, PointF secondPoint, PointF threePoint, PointF fourPoint, float startAngle, float sweepAngle, bool fill, float doughnutRadius, int pointIndex )
 		{
 			// Common Elements
 			CommonElements common = area.Common;
@@ -1141,7 +1191,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="lineSegmentType">AxisName of line segment. Used for step lines and splines.</param>
 		/// <param name="thinBorders">Thin border will be drawn on specified sides.</param>
 		/// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-		internal GraphicsPath Draw3DPolygon( 
+		public GraphicsPath Draw3DPolygon( 
 			ChartArea area,
 			Matrix3D matrix,
 			SurfaceNames surfaceName,
@@ -1334,7 +1384,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="translateCoordinates">Indicates that points coordinates should be translated.</param>
 		/// <param name="yValueIndex">Index of the Y value to use.</param>
 		/// <returns>Spline path.</returns>
-		internal GraphicsPath GetSplineFlattenPath(
+		public GraphicsPath GetSplineFlattenPath(
 			ChartArea area,
 			float positionZ, 
 			DataPoint3D	firstPoint,
@@ -1482,7 +1532,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="yValueIndex">Index of the Y value to use.</param>
 		/// <param name="clipInsideArea">Surface should be clipped inside plotting area.</param>
 		/// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-		internal GraphicsPath Draw3DSplineSurface( 
+		public GraphicsPath Draw3DSplineSurface( 
 			ChartArea area,
 			Matrix3D matrix,
 			LightStyle lightStyle,
@@ -1685,7 +1735,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="yValueIndex">Index of the Y value to use.</param>
 		/// <param name="clipInsideArea">Surface should be clipped inside plotting area.</param>
 		/// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-		internal GraphicsPath Draw3DSurface( 
+		public GraphicsPath Draw3DSurface( 
 			ChartArea area,
 			Matrix3D matrix,
 			LightStyle lightStyle,
@@ -2412,7 +2462,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="multiSeries">Indicates that multiple series are painted at the same time (stacked or side-by-side).</param>
 		/// <param name="lineSegmentType">Returns line segment type.</param>
 		/// <returns>Function retrns 0, 1 or 2. 0 - Do not draw surface, 1 - draw on the back, 2 - draw in front.</returns>
-		static internal int ShouldDrawLineChartSurface(
+		static public int ShouldDrawLineChartSurface(
 			ChartArea area,
 			bool reversedSeriesOrder,
 			SurfaceNames surfaceName, 
@@ -2647,7 +2697,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="neighborDataPoint">Neighbor point of the same series.</param>
 		/// <param name="neighborPointIndex">Neighbor point index in the array list.</param>
 		/// <returns>Data point found.</returns>
-		internal static DataPoint3D FindPointByIndex(ArrayList points, int index, DataPoint3D neighborDataPoint, ref int neighborPointIndex)
+		public static DataPoint3D FindPointByIndex(ArrayList points, int index, DataPoint3D neighborDataPoint, ref int neighborPointIndex)
 		{
 			// Try to look around the neighbor point index
 			if(neighborPointIndex != int.MinValue)
@@ -2730,7 +2780,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="borderDashStyle">Border Style</param>
 		/// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
 		/// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-		internal GraphicsPath Fill3DRectangle( 
+		public GraphicsPath Fill3DRectangle( 
 			RectangleF position, 
 			float positionZ, 
 			float depth, 
@@ -2778,7 +2828,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="veticalOrientation">Defines if bar is vertical or horizontal.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
         /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-        internal GraphicsPath Fill3DRectangle( 
+        public GraphicsPath Fill3DRectangle( 
 			RectangleF position, 
 			float positionZ, 
 			float depth, 
@@ -3412,7 +3462,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="imageScaleRect">Rectangle to which marker image should be scaled.</param>
 		/// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
 		/// <returns>Returns elemnt shape path if operationType parameter is set to ElementPath, otherwise Null.</returns>
-		internal GraphicsPath DrawMarker3D(
+		public GraphicsPath DrawMarker3D(
 			Matrix3D matrix,
 			LightStyle lightStyle,
 			float positionZ, 
@@ -3630,7 +3680,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="depth">Cube depth.</param>
 		/// <param name="matrix">Coordinate transformation matrix.</param>
 		/// <returns>Visible surfaces.</returns>
-		internal SurfaceNames GetVisibleSurfaces(
+		public SurfaceNames GetVisibleSurfaces(
 			RectangleF position, 
 			float positionZ, 
 			float depth, 
@@ -3679,7 +3729,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="depth">Cube depth.</param>
 		/// <param name="matrix">Coordinate transformation matrix.</param>
 		/// <returns>Visible surfaces.</returns>
-		internal SurfaceNames GetVisibleSurfacesWithPerspective(
+		public SurfaceNames GetVisibleSurfacesWithPerspective(
 			RectangleF position, 
 			float positionZ, 
 			float depth, 
@@ -3713,7 +3763,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="cubePoints">Array of 8 points which define the cube.</param>
 		/// <returns>Visible surfaces.</returns>
-		internal SurfaceNames GetVisibleSurfacesWithPerspective(Point3D[] cubePoints)
+		public SurfaceNames GetVisibleSurfacesWithPerspective(Point3D[] cubePoints)
 		{
 			// Check imput array size
 			if(cubePoints.Length != 8)
@@ -3769,7 +3819,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="second">Second point.</param>
         /// <param name="tree">Third point.</param>
         /// <returns>True if surface is visible</returns>
-		internal static bool IsSurfaceVisible( Point3D first, Point3D second, Point3D tree )
+		public static bool IsSurfaceVisible( Point3D first, Point3D second, Point3D tree )
 		{
 			// Check if points are oriented clocwise in 2D projection.
 			// If points are clockwise the surface is visible.
@@ -3840,7 +3890,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="x4">Second X value of second line.</param>
         /// <param name="y4">Second Y value of second line.</param>
         /// <returns>Intersection coordinates.</returns>
-		internal static PointF GetLinesIntersection(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+		public static PointF GetLinesIntersection(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
 		{
 			PointF result = PointF.Empty;
 
@@ -3910,7 +3960,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="veticalOrientation">Defines if bar is vertical or horizontal.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
         /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-		internal GraphicsPath Fill3DRectangleAsCylinder( 
+		public GraphicsPath Fill3DRectangleAsCylinder( 
 			RectangleF position, 
 			float positionZ, 
 			float depth, 
@@ -4295,7 +4345,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <summary>
 		/// Adds segment of the ellipse to form the front surface of the cylinder
 		/// </summary>
-		internal void AddEllipseSegment(
+		public void AddEllipseSegment(
 			GraphicsPath resultPath, 
 			GraphicsPath ellipseFlattenPath, 
 			GraphicsPath oppositeEllipseFlattenPath, 

@@ -69,8 +69,17 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
         #endregion // Keyword Names
     }
 
-	/// <summary>
-	/// ChartTypeRegistry class is a repository for all standard and custom 
+    public interface IChartTypeRegistry
+    {
+        ResourceManager ResourceManager { get; }
+
+        object GetChartType(SeriesChartType chartType);
+        object GetChartType(string name);
+        void Register(string name, Type chartType);
+    }
+
+    /// <summary>
+    /// ChartTypeRegistry class is a repository for all standard and custom 
     /// chart types. In order for the chart control to display the chart 
     /// type, it first must be registered using unique name and IChartType 
     /// derived class which provides the description of the chart type and 
@@ -79,140 +88,144 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
     /// ChartTypeRegistry can be used by user for custom chart type registering 
     /// and can be retrieved using Chart.GetService(typeof(ChartTypeRegistry)) 
     /// method.
-	/// </summary>
-    internal class ChartTypeRegistry : IServiceProvider, IDisposable
-	{
-		#region Fields
+    /// </summary>
+    internal class ChartTypeRegistry : IServiceProvider, IDisposable, IChartTypeRegistry
+    {
+        #region Fields
 
-		// Chart types image resource manager
-		private		ResourceManager		_resourceManager = null;
+        // Chart types image resource manager
+        private ResourceManager _resourceManager = null;
 
-		// Storage for registered/created chart types
-        internal    Hashtable           registeredChartTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
-        private     Hashtable           _createdChartTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
+        // Storage for registered/created chart types
+        internal Hashtable registeredChartTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
+        private Hashtable _createdChartTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
 
-		#endregion
+        #endregion
 
-		#region Constructor and Services
+        #region Constructor and Services
 
-		/// <summary>
-		/// Chart types registry public constructor.
-		/// </summary>
-		public ChartTypeRegistry()
-		{
-		}
+        /// <summary>
+        /// Chart types registry public constructor.
+        /// </summary>
+        public ChartTypeRegistry()
+        {
+        }
 
-		/// <summary>
-		/// Returns chart type registry service object.
-		/// </summary>
-		/// <param name="serviceType">Service type to get.</param>
-		/// <returns>Chart type registry service.</returns>
-		[EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		object IServiceProvider.GetService(Type serviceType)
-		{
-			if(serviceType == typeof(ChartTypeRegistry))
-			{
-				return this;
-			}
-            throw (new ArgumentException(SR.ExceptionChartTypeRegistryUnsupportedType( serviceType.ToString() ) ) );
-		}
+        /// <summary>
+        /// Returns chart type registry service object.
+        /// </summary>
+        /// <param name="serviceType">Service type to get.</param>
+        /// <returns>Chart type registry service.</returns>
+        [EditorBrowsableAttribute(EditorBrowsableState.Never)]
+        object IServiceProvider.GetService(Type serviceType)
+        {
+            if (serviceType == typeof(ChartTypeRegistry))
+            {
+                return this;
+            }
+            throw (new ArgumentException(SR.ExceptionChartTypeRegistryUnsupportedType(serviceType.ToString())));
+        }
 
-		#endregion
+        #endregion
 
-		#region Registry methods
+        #region Registry methods
 
-		/// <summary>
-		/// Adds chart type into the registry.
-		/// </summary>
-		/// <param name="name">Chart type name.</param>
-		/// <param name="chartType">Chart class type.</param>
-		public void Register(string name, Type chartType)
-		{
-			// First check if chart type with specified name already registered
-			if(registeredChartTypes.Contains(name))
-			{
-				// If same type provided - ignore
-				if(registeredChartTypes[name].GetType() == chartType)
-				{
-					return;
-				}
+        /// <summary>
+        /// Adds chart type into the registry.
+        /// </summary>
+        /// <param name="name">Chart type name.</param>
+        /// <param name="chartType">Chart class type.</param>
+        public void Register(string name, Type chartType)
+        {
+            // First check if chart type with specified name already registered
+            if (registeredChartTypes.Contains(name))
+            {
+                // If same type provided - ignore
+                if (registeredChartTypes[name].GetType() == chartType)
+                {
+                    return;
+                }
 
-				// Error - throw exception
-				throw( new ArgumentException( SR.ExceptionChartTypeNameIsNotUnique( name ) ) );
-			}
+                // Error - throw exception
+                throw (new ArgumentException(SR.ExceptionChartTypeNameIsNotUnique(name)));
+            }
 
-			// Make sure that specified class support IChartType interface
-			bool	found = false;
-			Type[]	interfaces = chartType.GetInterfaces();
-			foreach(Type type in interfaces)
-			{   
-				if(type == typeof(IChartType))
-				{
-					found = true;
-					break;
-				}
-			}
-			if(!found)
-			{
-                throw (new ArgumentException(SR.ExceptionChartTypeHasNoInterface ));
-			}
+            // Make sure that specified class support IChartType interface
+            bool found = false;
+            Type[] interfaces = chartType.GetInterfaces();
+            foreach (Type type in interfaces)
+            {
+                if (type == typeof(IChartType))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                throw (new ArgumentException(SR.ExceptionChartTypeHasNoInterface));
+            }
 
-			// Add chart type to the hash table
-			registeredChartTypes[name] = chartType;
-		}
+            // Add chart type to the hash table
+            registeredChartTypes[name] = chartType;
+        }
 
-		/// <summary>
-		/// Returns chart type object by name.
-		/// </summary>
-		/// <param name="chartType">Chart type.</param>
-		/// <returns>Chart type object derived from IChartType.</returns>
-		public IChartType GetChartType(SeriesChartType chartType)
-		{
-			return this.GetChartType(Series.GetChartTypeName(chartType));
-		}
+        object IChartTypeRegistry.GetChartType(SeriesChartType type) => GetChartType(type);
 
-		/// <summary>
-		/// Returns chart type object by name.
-		/// </summary>
-		/// <param name="name">Chart type name.</param>
-		/// <returns>Chart type object derived from IChartType.</returns>
-		public IChartType GetChartType(string name)
-		{
-			// First check if chart type with specified name registered
-			if(!registeredChartTypes.Contains(name))
-			{
-				throw( new ArgumentException( SR.ExceptionChartTypeUnknown( name ) ) );
-			}
+        /// <summary>
+        /// Returns chart type object by name.
+        /// </summary>
+        /// <param name="chartType">Chart type.</param>
+        /// <returns>Chart type object derived from IChartType.</returns>
+        public IChartType GetChartType(SeriesChartType chartType)
+        {
+            return this.GetChartType(Series.GetChartTypeName(chartType));
+        }
 
-			// Check if the chart type object is already created
-			if(!_createdChartTypes.Contains(name))
-			{	
-				// Create chart type object
-				_createdChartTypes[name] = 
-					((Type)registeredChartTypes[name]).Assembly.
-					CreateInstance(((Type)registeredChartTypes[name]).ToString());
-			}
+        object IChartTypeRegistry.GetChartType(string name) => GetChartType(name);
 
-			return (IChartType)_createdChartTypes[name];
-		}
+        /// <summary>
+        /// Returns chart type object by name.
+        /// </summary>
+        /// <param name="name">Chart type name.</param>
+        /// <returns>Chart type object derived from IChartType.</returns>
+        public IChartType GetChartType(string name)
+        {
+            // First check if chart type with specified name registered
+            if (!registeredChartTypes.Contains(name))
+            {
+                throw (new ArgumentException(SR.ExceptionChartTypeUnknown(name)));
+            }
 
-		/// <summary>
-		/// Chart images resource manager.
-		/// </summary>
-		public ResourceManager	ResourceManager
-		{
-			get
-			{
-				// Create chart images resource manager
-				if(_resourceManager == null)
-				{
+            // Check if the chart type object is already created
+            if (!_createdChartTypes.Contains(name))
+            {
+                // Create chart type object
+                _createdChartTypes[name] =
+                    ((Type)registeredChartTypes[name]).Assembly.
+                    CreateInstance(((Type)registeredChartTypes[name]).ToString());
+            }
+
+            return (IChartType)_createdChartTypes[name];
+        }
+
+        /// <summary>
+        /// Chart images resource manager.
+        /// </summary>
+        public ResourceManager ResourceManager
+        {
+            get
+            {
+                // Create chart images resource manager
+                if (_resourceManager == null)
+                {
                     _resourceManager = new ResourceManager(typeof(Chart).Namespace + ".Design", Assembly.GetExecutingAssembly());
-				}
-				return _resourceManager;
-			}
-		}
+                }
+                return _resourceManager;
+            }
+        }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
 
@@ -223,7 +236,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-            {   
+            {
                 // Dispose managed resource
                 foreach (string name in this._createdChartTypes.Keys)
                 {
@@ -245,9 +258,9 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 
         #endregion
     }
-	
-	/// <summary>
-	/// IChartType interface must be implemented for any standard or custom 
+
+    /// <summary>
+    /// IChartType interface must be implemented for any standard or custom 
     /// chart type displayed in the chart control. This interface defines 
     /// properties which provide information on chart type behaviour including 
     /// how many Y values supported, is it a stacked chart type, how it 
@@ -255,7 +268,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
     /// 
     /// IChartType interface methods define how to draw series data point, 
     /// calculate Y values and process SmartLabelStyle.
-	/// </summary>
+    /// </summary>
     internal interface IChartType : IDisposable
 	{
 		#region Properties

@@ -77,15 +77,15 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region Axis labels methods
+        #region Axis labels methods
 
-		/// <summary>
-		/// Indicates that custom grid lines should be painted.
-		/// </summary>
-		/// <returns>Indicates that custom grid lines should be painted.</returns>
-		internal bool IsCustomGridLines()
+        /// <summary>
+        /// Indicates that custom grid lines should be painted.
+        /// </summary>
+        /// <returns>Indicates that custom grid lines should be painted.</returns>
+        public bool IsCustomGridLines()
 		{
 			if(this.CustomLabels.Count > 0)
 			{
@@ -102,11 +102,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			return false;
 		}
 
-		/// <summary>
-		/// Indicates that custom tick marks should be painted.
-		/// </summary>
-		/// <returns>Indicates that custom tick marks should be painted.</returns>
-		internal bool IsCustomTickMarks()
+        /// <summary>
+        /// Indicates that custom tick marks should be painted.
+        /// </summary>
+        /// <returns>Indicates that custom tick marks should be painted.</returns>
+        public bool IsCustomTickMarks()
 		{
 			if(this.CustomLabels.Count > 0)
 			{
@@ -127,7 +127,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// Gets the type of the axis.
         /// </summary>
         /// <value>The type of the axis.</value>
-        internal AxisType GetAxisType()
+        public AxisType GetAxisType()
         {
             if (this.axisType == AxisName.X || this.axisType == AxisName.Y)
             {
@@ -173,7 +173,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// Gets the other (primary/secondary) axis.
         /// </summary>
         /// <returns></returns>
-        internal Axis GetOtherTypeAxis()
+        public Axis GetOtherTypeAxis()
         {
             return ChartArea.GetAxis(
                     this.axisType, 

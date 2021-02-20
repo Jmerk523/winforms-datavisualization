@@ -29,7 +29,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// <summary>
     /// Defines the style how the bars/columns are drawn.
     /// </summary>
-    internal enum BarDrawingStyle
+    public enum BarDrawingStyle
 	{
 		/// <summary>
 		/// Default bar/column style.
@@ -60,7 +60,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 	/// <summary>
 	/// Defines the style how the pie and doughnut charts are drawn.
 	/// </summary>
-    internal enum PieDrawingStyle
+    public enum PieDrawingStyle
 	{
 		/// <summary>
 		/// Default pie/doughnut drawing style.
@@ -134,13 +134,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		private int					_height;
 		
 		// Indicates that smoothing is applied while drawing shadows
-		internal bool				softShadows = true;
+		public bool		    		softShadows = true;
 
 		// Anti aliasing flags
-		private	AntiAliasingStyles		_antiAliasing = AntiAliasingStyles.All;
+		private	AntiAliasingStyles	_antiAliasing = AntiAliasingStyles.All;
 
 		// True if rendering into the metafile
-		internal bool				IsMetafile = false;
+		public bool				IsMetafile = false;
 
 		#endregion
 
@@ -154,7 +154,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="style">Line style.</param>
 		/// <param name="firstPointF">A Point that represents the first point to connect.</param>
 		/// <param name="secondPointF">A Point that represents the second point to connect.</param>
-		internal void DrawLineRel( 
+		public void DrawLineRel( 
 			Color color, 
 			int width, 
 			ChartDashStyle style, 
@@ -178,7 +178,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="style">Line style.</param>
 		/// <param name="firstPoint">A Point that represents the first point to connect.</param>
 		/// <param name="secondPoint">A Point that represents the second point to connect.</param>
-		internal void DrawLineAbs( 
+		public void DrawLineAbs( 
 			Color color, 
 			int width, 
 			ChartDashStyle style, 
@@ -245,7 +245,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="secondPoint">A Point that represents the second point to connect.</param>		
 		/// <param name="shadowColor">Shadow Color.</param>
 		/// <param name="shadowOffset">Shadow Offset.</param>
-		internal void DrawLineRel(	
+		public void DrawLineRel(	
 			Color color, 
 			int width, 
 			ChartDashStyle style, 
@@ -275,7 +275,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="secondPoint">A Point that represents the second point to connect.</param>		
 		/// <param name="shadowColor">Shadow Color.</param>
 		/// <param name="shadowOffset">Shadow Offset.</param>
-		internal void DrawLineAbs(	
+		public void DrawLineAbs(	
 			Color color, 
 			int width, 
 			ChartDashStyle style, 
@@ -320,7 +320,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="backColor">Back Color.</param>
 		/// <param name="foreColor">Fore Color.</param>
 		/// <returns>Brush</returns>
-        internal Brush GetHatchBrush( 
+        public Brush GetHatchBrush( 
 			ChartHatchStyle hatchStyle, 
 			Color backColor, 
 			Color foreColor 
@@ -343,7 +343,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="mode">Wrap mode.</param>
 		/// <param name="backColor">Image background color.</param>
 		/// <returns>Textured brush.</returns>
-		internal Brush GetTextureBrush(
+		public Brush GetTextureBrush(
 			string name, 
 			Color backImageTransparentColor, 
 			ChartImageWrapMode mode,
@@ -406,7 +406,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="secondColor">Second color.</param>
 		/// <param name="type ">Gradient type .</param>
 		/// <returns>Gradient Brush</returns>
-        internal Brush GetGradientBrush( 
+        public Brush GetGradientBrush( 
 			RectangleF rectangle, 
 			Color firstColor, 
 			Color secondColor, 
@@ -515,7 +515,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="firstColor">First color</param>
 		/// <param name="secondColor">Second color</param>
 		/// <returns>Gradient Brush</returns>
-		internal Brush GetPieGradientBrush( 
+		public Brush GetPieGradientBrush( 
 			RectangleF rectangle, 
 			Color firstColor, 
 			Color secondColor 
@@ -551,7 +551,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// </summary>
 		/// <param name="style">Chart Line style.</param>
 		/// <returns>GDI+ line style.</returns>
-		internal DashStyle GetPenStyle( ChartDashStyle style )
+		public DashStyle GetPenStyle( ChartDashStyle style )
 		{
 			// Convert to chart line styles. The custom style doesn’t exist.
 			switch( style )
@@ -579,7 +579,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="rect">Marker rectangle.</param>
 		/// <param name="numberOfCorners">Number of corners (4 and up).</param>
 		/// <returns>Array of points.</returns>
-		internal PointF[] CreateStarPolygon(RectangleF rect, int numberOfCorners)
+		public PointF[] CreateStarPolygon(RectangleF rect, int numberOfCorners)
 		{
             int numberOfCornersX2;
             checked
@@ -618,7 +618,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="shadowSize">Marker shadow size.</param>
 		/// <param name="shadowColor">Marker shadow color.</param>
 		/// <param name="imageScaleRect">Rectangle to which marker image should be scaled.</param>
-		internal void DrawMarkerRel(
+		public void DrawMarkerRel(
 			PointF point, 
 			MarkerStyle markerStyle, 
 			int markerSize, 
@@ -650,7 +650,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="shadowColor">Marker shadow color.</param>
 		/// <param name="imageScaleRect">Rectangle to which marker image should be scaled.</param>
 		/// <param name="forceAntiAlias">Always use anti aliasing when drawing the marker.</param>
-		internal void DrawMarkerAbs(
+		public void DrawMarkerAbs(
 			PointF point, 
 			MarkerStyle markerStyle, 
 			int markerSize, 
@@ -1118,7 +1118,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="stringFormat">StringFormat object that represents formatting information, such as line spacing, for the string.</param>
         /// <param name="textOrientation">Text orientation.</param>
         /// <returns>This method returns a SizeF structure that represents the size, in pixels, of the string specified in the text parameter as drawn with the font parameter and the stringFormat parameter.</returns>
-        internal SizeF MeasureString(
+        public SizeF MeasureString(
             string text,
             Font font,
             SizeF layoutArea,
@@ -1148,7 +1148,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="stringFormat">A StringFormat object that represents formatting information, such as line spacing, for the text string. </param>
         /// <param name="textOrientation">Text orientation.</param>
         /// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-        internal SizeF MeasureStringRel(
+        public SizeF MeasureStringRel(
             string text, 
             Font font, 
             SizeF layoutArea, 
@@ -1175,7 +1175,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="rect">Position of the drawn text in pixels.</param>
 		/// <param name="format">StringFormat object that specifies formatting properties, such as line spacing and alignment, that are applied to the drawn text.</param>
         /// <param name="textOrientation">Text orientation.</param>
-        internal void DrawString(
+        public void DrawString(
             string text,
             Font font,
             Brush brush,
@@ -1205,7 +1205,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="format">Format and text alignment.</param>
         /// <param name="angle">Text angle.</param>
         /// <param name="textOrientation">Text orientation.</param>
-        internal void DrawStringRel(
+        public void DrawStringRel(
             string text,
             System.Drawing.Font font,
             System.Drawing.Brush brush,
@@ -1236,7 +1236,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="position">Text Position.</param>
         /// <param name="format">Format and text alignment.</param>
         /// <param name="textOrientation">Text orientation.</param>
-        internal void DrawStringRel(
+        public void DrawStringRel(
             string text,
             System.Drawing.Font font,
             System.Drawing.Brush brush,
@@ -1263,7 +1263,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// </summary>
         /// <param name="text">Original text.</param>
         /// <returns>Stacked text.</returns>
-        internal static string GetStackedText(string text)
+        public static string GetStackedText(string text)
         {
             string result = string.Empty;
             foreach (char ch in text)
@@ -1275,6 +1275,43 @@ namespace System.Windows.Forms.DataVisualization.Charting
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// Draw a string and fills it's background
+        /// </summary>
+        /// <param name="text">Text.</param>
+        /// <param name="font">Text Font.</param>
+        /// <param name="brush">Text Brush.</param>
+        /// <param name="position">Text Position.</param>
+        /// <param name="format">Format and text alignment.</param>
+        /// <param name="angle">Text angle.</param>
+        /// <param name="backPosition">Text background position.</param>
+        /// <param name="backColor">Back Color</param>
+        /// <param name="borderColor">Border Color</param>
+        /// <param name="borderWidth">Border Width</param>
+        /// <param name="borderDashStyle">Border Style</param>
+        /// <param name="series">Series</param>
+        /// <param name="point">Point</param>
+        /// <param name="pointIndex">Point index in series</param>
+        public void DrawPointLabelStringRel(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            RectangleF position,
+            System.Drawing.StringFormat format,
+            int angle,
+            RectangleF backPosition,
+            Color backColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            Series series,
+            DataPoint point,
+            int pointIndex)
+        {
+            DrawPointLabelStringRel(null, text, font, brush, position, format, angle, backPosition,
+                backColor, borderColor, borderWidth, borderDashStyle, series, point, pointIndex);
         }
 
 		/// <summary>
@@ -1352,27 +1389,64 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
             else
                 DrawStringRel(text, font, brush, position, format, angle);
-		}
+        }
 
-		/// <summary>
-		/// Draw a string and fills it's background
-		/// </summary>
-		/// <param name="common">The Common elements object.</param>
-		/// <param name="text">Text.</param>
-		/// <param name="font">Text Font.</param>
-		/// <param name="brush">Text Brush.</param>
-		/// <param name="position">Text Position.</param>
-		/// <param name="format">Format and text alignment.</param>
-		/// <param name="angle">Text angle.</param>
-		/// <param name="backPosition">Text background position.</param>
-		/// <param name="backColor">Back Color</param>
-		/// <param name="borderColor">Border Color</param>
-		/// <param name="borderWidth">Border Width</param>
-		/// <param name="borderDashStyle">Border Style</param>
-		/// <param name="series">Series</param>
-		/// <param name="point">Point</param>
-		/// <param name="pointIndex">Point index in series</param>
-		internal void DrawPointLabelStringRel( 
+        /// <summary>
+        /// Draw a string and fills it's background
+        /// </summary>
+        /// <param name="text">Text.</param>
+        /// <param name="font">Text Font.</param>
+        /// <param name="brush">Text Brush.</param>
+        /// <param name="position">Text Position.</param>
+        /// <param name="format">Format and text alignment.</param>
+        /// <param name="angle">Text angle.</param>
+        /// <param name="backPosition">Text background position.</param>
+        /// <param name="backColor">Back Color</param>
+        /// <param name="borderColor">Border Color</param>
+        /// <param name="borderWidth">Border Width</param>
+        /// <param name="borderDashStyle">Border Style</param>
+        /// <param name="series">Series</param>
+        /// <param name="point">Point</param>
+        /// <param name="pointIndex">Point index in series</param>
+        public void DrawPointLabelStringRel(
+            string text,
+            System.Drawing.Font font,
+            System.Drawing.Brush brush,
+            PointF position,
+            System.Drawing.StringFormat format,
+            int angle,
+            RectangleF backPosition,
+            Color backColor,
+            Color borderColor,
+            int borderWidth,
+            ChartDashStyle borderDashStyle,
+            Series series,
+            DataPoint point,
+            int pointIndex)
+        {
+            DrawPointLabelStringRel(null, text, font, brush, position, format, angle, backPosition,
+                backColor, borderColor, borderWidth, borderDashStyle, series, point, pointIndex);
+        }
+
+        /// <summary>
+        /// Draw a string and fills it's background
+        /// </summary>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="text">Text.</param>
+        /// <param name="font">Text Font.</param>
+        /// <param name="brush">Text Brush.</param>
+        /// <param name="position">Text Position.</param>
+        /// <param name="format">Format and text alignment.</param>
+        /// <param name="angle">Text angle.</param>
+        /// <param name="backPosition">Text background position.</param>
+        /// <param name="backColor">Back Color</param>
+        /// <param name="borderColor">Border Color</param>
+        /// <param name="borderWidth">Border Width</param>
+        /// <param name="borderDashStyle">Border Style</param>
+        /// <param name="series">Series</param>
+        /// <param name="point">Point</param>
+        /// <param name="pointIndex">Point index in series</param>
+        internal void DrawPointLabelStringRel( 
 			CommonElements common,
 			string text, 
 			System.Drawing.Font font, 
@@ -1584,7 +1658,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="position">Text Position.</param>
 		/// <param name="format">Format and text alignment.</param>
 		/// <param name="angle">Text angle.</param>
-		internal void DrawStringRel( 
+		public void DrawStringRel( 
 			string text, 
 			System.Drawing.Font font, 
 			System.Drawing.Brush brush, 
@@ -1611,7 +1685,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="absPosition">Text Position.</param>
 		/// <param name="format">Format and text alignment.</param>
 		/// <param name="angle">Text angle.</param>
-		internal void DrawStringAbs( 
+		public void DrawStringAbs( 
 			string text, 
 			System.Drawing.Font font, 
 			System.Drawing.Brush brush, 
@@ -1653,7 +1727,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="size">Title text size</param>
         /// <param name="angle">Title rotation angle</param>
         /// <returns></returns>
-        internal GraphicsPath GetTranformedTextRectPath(PointF center, SizeF size, int angle)
+        public GraphicsPath GetTranformedTextRectPath(PointF center, SizeF size, int angle)
         {
             // Text hot area is 10px greater than the size of text
             size.Width += 10; 
@@ -1702,7 +1776,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="label">Custom Label Item</param>
 		/// <param name="truncatedLeft">Label is truncated on the left.</param>
 		/// <param name="truncatedRight">Label is truncated on the right.</param>
-		internal void DrawLabelStringRel( 
+		public void DrawLabelStringRel( 
 			Axis axis, 
 			int labelRowIndex, 
 			LabelMarkStyle labelMark, 
@@ -2568,7 +2642,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="text">The string to measure</param>
 		/// <param name="font">The Font object used to determine the size of the text string. </param>
 		/// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-		internal SizeF MeasureStringRel( string text, Font font )
+		public SizeF MeasureStringRel( string text, Font font )
 		{
 			SizeF newSize;
 
@@ -2589,7 +2663,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="layoutArea">A SizeF structure that specifies the layout rectangle for the text. </param>
 		/// <param name="stringFormat">A StringFormat object that represents formatting information, such as line spacing, for the text string. </param>
 		/// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-		internal SizeF MeasureStringRel( string text, Font font, SizeF layoutArea, StringFormat stringFormat )
+		public SizeF MeasureStringRel( string text, Font font, SizeF layoutArea, StringFormat stringFormat )
 		{
 			SizeF size, newSize;
 
@@ -2610,7 +2684,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="text">The string to measure</param>
 		/// <param name="font">The Font object used to determine the size of the text string. </param>
 		/// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-		internal Size MeasureStringAbs( string text, Font font )
+		public Size MeasureStringAbs( string text, Font font )
 		{
 			// Measure string
 			SizeF size = this.MeasureString( text, font );
@@ -2627,7 +2701,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="layoutArea">A SizeF structure that specifies the layout rectangle for the text. </param>
 		/// <param name="stringFormat">A StringFormat object that represents formatting information, such as line spacing, for the text string. </param>
 		/// <returns>A SizeF structure that represents the size of text as drawn with font.</returns>
-		internal Size MeasureStringAbs( string text, Font font, SizeF layoutArea, StringFormat stringFormat )
+		public Size MeasureStringAbs( string text, Font font, SizeF layoutArea, StringFormat stringFormat )
 		{
 			SizeF size = this.MeasureString( text, font, layoutArea, stringFormat );
 			return new Size( (int)Math.Ceiling(size.Width), (int)Math.Ceiling(size.Height));
@@ -2644,7 +2718,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="brush">A Brush object that determines the color and/or texture of the drawn text.</param>
 		/// <param name="layoutRectangle">A RectangleF structure that specifies the location of the drawn text.</param>
 		/// <param name="format">A StringFormat object that specifies formatting properties, such as line spacing and alignment, that are applied to the drawn text.</param>
-		internal void DrawStringRel( string text, Font font, Brush brush,	RectangleF layoutRectangle,	StringFormat format	)
+		public void DrawStringRel( string text, Font font, Brush brush,	RectangleF layoutRectangle,	StringFormat format	)
 		{
 			RectangleF rect;
 
@@ -2685,7 +2759,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="layoutRectangle">A RectangleF structure that specifies the location of the drawn text.</param>
 		/// <param name="format">A StringFormat object that specifies formatting properties, such as line spacing and alignment, that are applied to the drawn text.</param>
 		/// <param name="angle">A angle of the text</param>
-		internal void DrawStringRel( 
+		public void DrawStringRel( 
 			string text, 
 			Font font, 
 			Brush brush,	
@@ -2765,7 +2839,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="barDrawingStyle">Bar drawing style.</param>
 		/// <param name="isVertical">True if a vertical bar.</param>
 		/// <param name="rect">Rectangle position.</param>
-		internal void DrawRectangleBarStyle(BarDrawingStyle barDrawingStyle, bool isVertical, RectangleF rect)
+		public void DrawRectangleBarStyle(BarDrawingStyle barDrawingStyle, bool isVertical, RectangleF rect)
 		{
 			// Check if non-default bar drawing style is specified
 			if(barDrawingStyle != BarDrawingStyle.Default)
@@ -3123,7 +3197,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="penAlignment">Pen Alignment</param>
 		/// <param name="barDrawingStyle">Bar drawing style.</param>
 		/// <param name="isVertical">True if a vertical bar.</param>
-		internal void FillRectangleRel( RectangleF rectF, 
+		public void FillRectangleRel( RectangleF rectF, 
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
 			string backImage, 
@@ -3182,7 +3256,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="shadowColor">Shadow Color</param>
 		/// <param name="shadowOffset">Shadow Offset</param>
 		/// <param name="penAlignment">Pen Alignment</param>
-		internal void FillRectangleRel( RectangleF rectF, 
+		public void FillRectangleRel( RectangleF rectF, 
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
 			string backImage, 
@@ -3242,7 +3316,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="circular">Draw circular shape inside the rectangle.</param>
 		/// <param name="circularSectorsCount">Number of sectors in circle when drawing the polygon.</param>
 		/// <param name="circle3D">3D Circle must be drawn.</param>
-		internal void FillRectangleRel( RectangleF rectF, 
+		public void FillRectangleRel( RectangleF rectF, 
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
 			string backImage, 
@@ -3308,7 +3382,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="circle3D">3D Circle must be drawn.</param>
 		/// <param name="barDrawingStyle">Bar drawing style.</param>
 		/// <param name="isVertical">True if a vertical bar.</param>
-		internal void FillRectangleRel( RectangleF rectF, 
+		public void FillRectangleRel( RectangleF rectF, 
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
 			string backImage, 
@@ -3623,7 +3697,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="shadowColor">Shadow Color</param>
 		/// <param name="shadowOffset">Shadow Offset</param>
 		/// <param name="backColor">Back Color</param>
-        internal void FillRectangleShadowAbs( 
+        public void FillRectangleShadowAbs( 
 			RectangleF rect, 
 			Color shadowColor, 
 			float shadowOffset, 
@@ -3647,7 +3721,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="backColor">Back Color</param>
         /// <param name="circular">Draw circular shape inside the rectangle.</param>
         /// <param name="circularSectorsCount">Number of sectors in circle when drawing the polygon.</param>
-		internal void FillRectangleShadowAbs( 
+		public void FillRectangleShadowAbs( 
 			RectangleF rect, 
 			Color shadowColor, 
 			float shadowOffset, 
@@ -3792,7 +3866,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="position">Circle position.</param>
 		/// <param name="polygonSectorsNumber">Number of sectors for the polygon.</param>
 		/// <returns>Graphics path of the polygon circle.</returns>
-		internal GraphicsPath GetPolygonCirclePath(RectangleF position, int polygonSectorsNumber)
+		public GraphicsPath GetPolygonCirclePath(RectangleF position, int polygonSectorsNumber)
 		{
 			PointF			firstPoint = new PointF(position.X + position.Width/2f, position.Y);
 			PointF			centerPoint = new PointF(position.X + position.Width/2f, position.Y + position.Height/2f);
@@ -3847,7 +3921,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="position">Circle position.</param>
 		/// <param name="polygonSectorsNumber">Number of sectors for the polygon.</param>
 		/// <param name="circle3D">Indicates that circle should be 3D..</param>
-		internal void DrawCircleAbs(Pen pen, Brush brush, RectangleF position, int polygonSectorsNumber, bool circle3D)
+		public void DrawCircleAbs(Pen pen, Brush brush, RectangleF position, int polygonSectorsNumber, bool circle3D)
 		{
 			bool	fill3DCircle = (circle3D && brush != null);
 
@@ -3969,7 +4043,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <returns>3D brush.</returns>
         [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily",
             Justification = "Too large of a code change to justify making this change")]
-		internal Brush GetSector3DBrush(Brush brush, float curentSector, float sectorSize)
+		public Brush GetSector3DBrush(Brush brush, float curentSector, float sectorSize)
 		{
 			// Get color from the brush
 			Color	brushColor = Color.Gray;
@@ -4020,7 +4094,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <param name="beginColor">Start color for gradient.</param>
         /// <param name="position">Position used between Start and end color.</param>
         /// <returns>Calculated Gradient color from gradient position</returns>
-		internal Color GetBrightGradientColor( Color beginColor, double position )
+		public Color GetBrightGradientColor( Color beginColor, double position )
 		{
 			double brightness = 0.5;
 			if( position < brightness )
@@ -4053,7 +4127,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="borderWidth">Border Width</param>
 		/// <param name="borderDashStyle">Border Style</param>
 		/// <param name="penAlignment">Border is outside or inside rectangle</param>
-		internal void FillRectangleAbs( RectangleF rect, 
+		public void FillRectangleAbs( RectangleF rect, 
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
 			string backImage, 
@@ -4264,7 +4338,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="penAlignment">Border is outside or inside rectangle</param>
 		/// <param name="shadowOffset">Shadow offset.</param>
 		/// <param name="shadowColor">Shadow color.</param>
-		internal void DrawPathAbs( 
+		public void DrawPathAbs( 
 			GraphicsPath path, 
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
@@ -4361,7 +4435,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 		/// <param name="borderWidth">Border Width</param>
 		/// <param name="borderDashStyle">Border Style</param>
 		/// <param name="penAlignment">Border is outside or inside rectangle</param>
-		internal void DrawPathAbs( GraphicsPath path, 
+		public void DrawPathAbs( GraphicsPath path, 
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
 			string backImage, 
@@ -4538,7 +4612,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <param name="backGradientStyle">Gradient type </param>
 		/// <param name="backSecondaryColor">Gradient End Color</param>
 		/// <returns>New brush object.</returns>
-		internal Brush CreateBrush( 
+		public Brush CreateBrush( 
 			RectangleF rect,
 			Color backColor, 
 			ChartHatchStyle backHatchStyle, 
@@ -4720,7 +4794,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <param name="rect">Rectangle coordinates.</param>
 		/// <param name="cornerRadius">Array of 4 corners radius.</param>
 		/// <returns>Graphics path object.</returns>
-		internal GraphicsPath CreateRoundedRectPath(RectangleF rect, float[] cornerRadius)
+		public GraphicsPath CreateRoundedRectPath(RectangleF rect, float[] cornerRadius)
 		{
 			// Create rounded rectangle path
 			GraphicsPath path = new GraphicsPath();
@@ -4745,7 +4819,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <param name="centerColor">Center color.</param>
 		/// <param name="surroundColor">Surrounding color.</param>
 		/// <param name="shadowScale">Shadow scale value.</param>
-		internal void DrawRoundedRectShadowAbs(RectangleF rect, float[] cornerRadius, float radius, Color centerColor, Color surroundColor, float shadowScale)
+		public void DrawRoundedRectShadowAbs(RectangleF rect, float[] cornerRadius, float radius, Color centerColor, Color surroundColor, float shadowScale)
 		{
 			// Create rounded rectangle path
 			GraphicsPath path = CreateRoundedRectPath(rect, cornerRadius);
@@ -4788,7 +4862,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <param name="borderColor">Border Color</param>
 		/// <param name="borderWidth">Border Width</param>
 		/// <param name="borderDashStyle">Border Style</param>
-		internal void Draw3DBorderRel(
+		public void Draw3DBorderRel(
 			BorderSkin borderSkin, 
 			RectangleF rect, 
 			Color backColor, 
@@ -4825,7 +4899,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <param name="borderColor">Border Color</param>
 		/// <param name="borderWidth">Border Width</param>
 		/// <param name="borderDashStyle">Border Style</param>
-		internal void Draw3DBorderAbs(
+		public void Draw3DBorderAbs(
 			BorderSkin borderSkin, 
 			RectangleF absRect, 
 			Color backColor, 
@@ -4867,7 +4941,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// </summary>
 		/// <param name="point">Data point to get the drawing style for.</param>
 		/// <returns>pie drawing style.</returns>
-		internal static PieDrawingStyle GetPieDrawingStyle(DataPoint point)
+		public static PieDrawingStyle GetPieDrawingStyle(DataPoint point)
 		{
 			// Get column drawing style
 			PieDrawingStyle pieDrawingStyle = PieDrawingStyle.Default;
@@ -4912,9 +4986,9 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <param name="borderDashStyle">Border Style</param>
 		/// <param name="shadow">True if shadow is active</param>
 		/// <param name="doughnut">True if Doughnut is drawn instead of pie</param>
-		/// <param name="doughnutRadius">Internal radius of the doughnut</param>
+		/// <param name="doughnutRadius">public radius of the doughnut</param>
 		/// <param name="pieDrawingStyle">Pie drawing style.</param>
-		internal void DrawPieRel( 
+		public void DrawPieRel( 
 			RectangleF rect, 
 			float startAngle,
 			float sweepAngle,
@@ -5254,7 +5328,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <param name="lineDashStyle">Line Dash style</param>
 		/// <param name="shift">Distance from the chart area</param>
 		/// <param name="size">Arrow size</param>
-		internal void DrawArrowRel( PointF position, ArrowOrientation orientation, AxisArrowStyle type, Color color, int lineWidth, ChartDashStyle lineDashStyle, double shift, double size )
+		public void DrawArrowRel( PointF position, ArrowOrientation orientation, AxisArrowStyle type, Color color, int lineWidth, ChartDashStyle lineDashStyle, double shift, double size )
 		{
 			// Check if arrow should be drawn
 			if(type == AxisArrowStyle.None)
@@ -5460,7 +5534,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// </summary>
 		/// <param name="point">Data point to get the drawing style for.</param>
 		/// <returns>Bar drawing style.</returns>
-		internal static BarDrawingStyle GetBarDrawingStyle(DataPoint point)
+		public static BarDrawingStyle GetBarDrawingStyle(DataPoint point)
 		{
 			// Get column drawing style
 			BarDrawingStyle barDrawingStyle = BarDrawingStyle.Default;
@@ -5501,7 +5575,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// </summary>
 		/// <param name="rect">Rectangle which has to be rounded</param>
 		/// <returns>Rounded rectangle</returns>
-		internal RectangleF Round(RectangleF rect)
+		public RectangleF Round(RectangleF rect)
 		{
 			float	left = (float)Math.Round( (double)rect.Left );
 			float	right = (float)Math.Round( (double)rect.Right );
@@ -5540,13 +5614,13 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// </summary>
 		/// <param name="width">Width</param>
 		/// <param name="height">Height</param>
-		internal void SetPictureSize( int width, int height )
+		public void SetPictureSize( int width, int height )
 		{
 			this._width = width;
 			this._height = height;
 		}
 
-        internal ChartGraphics(Graphics graphics) : this(null, graphics)
+        public ChartGraphics(Graphics graphics) : this(null, graphics)
         {
         }
 
@@ -5574,7 +5648,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// <summary>
 		/// Chart Graphics Anti alias mode
 		/// </summary>
-		internal AntiAliasingStyles AntiAliasing
+		public AntiAliasingStyles AntiAliasing
 		{
 			get
 			{
@@ -5603,7 +5677,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <summary>
         /// Gets reusable pen.
         /// </summary>
-        internal Pen Pen
+        public Pen Pen
         {
             get { return _pen; }
         }
@@ -5613,7 +5687,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
 		/// to the rectangle specified by a RectangleF structure.
 		/// </summary>
 		/// <param name="region">Region rectangle</param>
-		internal void SetClip( RectangleF region )
+		public void SetClip( RectangleF region )
 		{
 			this.SetClipAbs( GetAbsoluteRectangle( region ) );
 		}
@@ -5629,7 +5703,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <param name="endColor">The color from the gradient end.</param>
         /// <param name="relativePosition">The relative position.</param>
         /// <returns>Result color.</returns>
-        static internal Color GetGradientColor(Color beginColor, Color endColor, double relativePosition)
+        static public Color GetGradientColor(Color beginColor, Color endColor, double relativePosition)
 		{
 			// Check if position is valid
 			if(relativePosition < 0 || relativePosition > 1 || double.IsNaN(relativePosition))
@@ -5676,7 +5750,7 @@ System.Drawing.Image image = _common.ImageLoader.LoadImage( backImage );
         /// <summary>
         /// Returns chart right to left flag 
         /// </summary>
-        internal bool IsRightToLeft
+        public bool IsRightToLeft
         {
             get
             {

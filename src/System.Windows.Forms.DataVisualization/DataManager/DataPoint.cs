@@ -5945,7 +5945,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 	/// <summary>
 	/// Class stores additional information about the data point in 3D space.
 	/// </summary>
-	internal class DataPoint3D
+	public class DataPoint3D
 	{
 		#region Fields
 

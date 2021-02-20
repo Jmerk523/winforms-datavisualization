@@ -218,7 +218,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 	/// <summary>
 	/// Axis Arrow orientation
 	/// </summary>
-	internal enum ArrowOrientation
+	public enum ArrowOrientation
 	{
 		/// <summary>
 		/// Arrow direction is Right - Left
@@ -860,7 +860,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// <summary>
     /// Common chart helper methods used across different chart elements.
     /// </summary>
-    internal class ChartHelper
+    internal static class ChartHelper
     {
         #region Fields
 
@@ -870,15 +870,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         internal const int MaxNumOfGridlines = 10000;
 
         #endregion // Fields
-
-        #region Constructor
-
-        /// <summary>
-        /// Private constructor to avoid instantiating the class
-        /// </summary>
-        private ChartHelper() { }
-
-        #endregion // Constructor
 
         #region Methods
 

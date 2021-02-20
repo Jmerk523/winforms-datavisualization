@@ -1325,7 +1325,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// Paint Axis
         /// </summary>
         /// <param name="graph">Reference to the Chart Graphics object</param>
-        internal void Paint(ChartGraphics graph)
+        public void Paint(ChartGraphics graph)
         {
             // Only Y axis is drawn in the circular Common.Chart area
             if (ChartArea != null && ChartArea.chartAreaIsCurcular)
@@ -2717,7 +2717,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// Paint Axis Grid lines
         /// </summary>
         /// <param name="graph">Reference to the Chart Graphics object</param>
-        internal void PaintGrids(ChartGraphics graph)
+        public void PaintGrids(ChartGraphics graph)
         {
             object obj;
 
@@ -2731,7 +2731,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// </summary>
         /// <param name="graph">Reference to the Chart Graphics object</param>
         /// <param name="obj">Returns selected grid object</param>
-        internal void PaintGrids(ChartGraphics graph, out object obj)
+        public void PaintGrids(ChartGraphics graph, out object obj)
         {
             obj = null;
 
@@ -3016,7 +3016,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			if(Common.Chart == null)
 			{
 #if SUBAXES
-				else if(this is SubAxis)
+				if(this is SubAxis)
 				{
 					if( ((SubAxis)this).parentAxis != null)
 					{
